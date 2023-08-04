@@ -1,0 +1,43 @@
+.promo {
+  border-radius: 10px;
+  background-color: #272727;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 40px 0;
+}
+
+.promo__header {
+  margin: 160px 0 150px;
+  font-size: 50px;
+  line-height: 58px;
+  max-width: 730px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.promo__buttons {
+  margin: 0 0 30px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.promo__button {
+  padding: 10px 17px 10px;
+  background-color: #303030;
+  color: white;
+  /* list-style-type: none; */
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  transition: opacity .15s linear;
+}
+
+.promo__button:hover {
+  opacity: .7;
+}

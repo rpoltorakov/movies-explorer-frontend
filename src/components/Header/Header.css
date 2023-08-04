@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 18px 70px 18px;
+  align-items: center;
+}
+
+.header__logo {
+  transition: opacity .15s linear;
+  cursor: pointer;
+}
+
+.header__logo:hover {
+  opacity: .7;
+}
+
+.header__dropdown {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 15px 0 15px;
+  }
+
+  .header__account {
+    display: none;
+  }
+  
+  .header__dropdown {
+    display: block;
+    background-image: url('../../images/popup-button.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: transparent;
+    border: none;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity .15s linear;
+  }
+
+  .header__dropdown:hover {
+    opacity: .7;
+  }
+}

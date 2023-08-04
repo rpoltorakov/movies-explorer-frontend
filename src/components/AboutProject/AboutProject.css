@@ -1,0 +1,97 @@
+.aboutProject {
+  margin: 0 70px 0;
+}
+
+.aboutProject__title {
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 110px 0 0;
+  padding: 0 0 23px;
+  border-bottom: 1px solid #DADADA;
+}
+
+.aboutProject__info {
+  margin: 70px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 40px;
+  row-gap: 26px;
+}
+
+.aboutProject__subtitle {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+.aboutProject__subtitle_left {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.aboutProject__subtitle_left {
+  grid-area: 1 / 2 / 2 / 3
+}
+
+.aboutProject__text {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.aboutProject__text_left {
+  grid-area: 2 / 1 / 3 / 2
+}
+
+.aboutProject__text_right {
+  grid-area: 2 / 2 / 3 / 3
+}
+
+.aboutProject__progressBars {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 5px;
+  margin: 110px 0 100px;
+}
+
+.aboutProject__progressBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: normal;
+  min-height: 36px;
+}
+
+.aboutProject__progressBar_leftBar {
+  color: black;
+  background-color: #3DDC84;
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.aboutProject__progressBar_rightBar {
+  background-color: #303030;
+  grid-area: 1 / 2 / 2 / 6;
+}
+
+.aboutProject__progressBar_leftSubtitle {
+  color: #8B8B8B;
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.aboutProject__progressBar_rightSubtitle {
+  color: #8B8B8B;
+  grid-area: 2 / 2 / 3 / 6;
+}

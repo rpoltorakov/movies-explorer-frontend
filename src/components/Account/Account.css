@@ -1,0 +1,26 @@
+.header__account {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+}
+
+.header__accountText {
+  color: white;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.header__accountIcon {
+  background-color: #313131;
+  border-radius: 50px;
+  width: 26px;
+  height: 26px;
+  object-fit: none;
+}

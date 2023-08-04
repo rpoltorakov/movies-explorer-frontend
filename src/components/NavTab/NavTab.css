@@ -1,0 +1,38 @@
+.navTab {
+  margin: 0 0 20px;
+  padding: 18px 70px 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navTab__logo {
+
+}
+
+.navTab__buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navTab__button {
+  margin: 0;
+  padding: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: opacity .15s linear;
+}
+
+.navTab__button:hover {
+  opacity: .7;
+}
+
+.navTab__button_accent {
+  margin: 0 0 0 30px;
+  padding: 8px 20px 8px;
+  background-color: #3DDC84;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
