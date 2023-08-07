@@ -5,7 +5,7 @@ import logo from '../../images/logo.svg'
 import Navigation from '../Navigation/Navigation'
 import Account from '../Account/Account'
 
-function Header() {
+function Header({ onClick }) {
   return (
     <header className='header'>
       <Link className='header__logo' to='/'>
@@ -14,11 +14,11 @@ function Header() {
 
       <Navigation />
 
-      <div className="header__acount">
+      <div className="header__account">
         <Account />
       </div>
       
-      <button className='header__dropdown' type='button' />
+      <button className='header__popupButton' type='button' onClick={onClick} />
     </header>
   );
 }

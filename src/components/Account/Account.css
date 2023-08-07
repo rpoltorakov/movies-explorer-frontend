@@ -1,12 +1,19 @@
-.header__account {
+.account {
   text-decoration: none;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 7px;
+  margin: 0;
+  padding: 0;
+  transition: opacity .15s linear;
 }
 
-.header__accountText {
+.account:hover {
+  opacity: .7;
+}
+
+.account__text {
   color: white;
   font-feature-settings: 'clig' off, 'liga' off;
   font-size: 13px;
@@ -17,7 +24,7 @@
   padding: 0;
 }
 
-.header__accountIcon {
+.account__icon {
   background-color: #313131;
   border-radius: 50px;
   width: 26px;

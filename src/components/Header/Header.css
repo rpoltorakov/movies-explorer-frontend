@@ -4,6 +4,7 @@
   justify-content: space-between;
   padding: 18px 70px 18px;
   align-items: center;
+  max-height: 74px;
 }
 
 .header__logo {
@@ -15,7 +16,7 @@
   opacity: .7;
 }
 
-.header__dropdown {
+.header__popupButton {
   display: none;
 }
 
@@ -28,7 +29,7 @@
     display: none;
   }
   
-  .header__dropdown {
+  .header__popupButton {
     display: block;
     background-image: url('../../images/popup-button.svg');
     background-position: center;
@@ -44,7 +45,7 @@
     transition: opacity .15s linear;
   }
 
-  .header__dropdown:hover {
+  .header__popupButton:hover {
     opacity: .7;
   }
 }

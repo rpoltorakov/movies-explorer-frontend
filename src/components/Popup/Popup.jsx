@@ -3,11 +3,11 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import Account from '../Account/Account';
 
-function Popup() {
+function Popup({ isOpened, onClose }) {
   return (
-    <div className='popup popup_opened'>
+    <div className={`popup ${isOpened ? 'popup_opened' : ''}`}>
       <div className='popup__container'>
-        <button className='popup__closeButton' />
+        <button className='popup__closeButton' onClick={onClose} />
 
         <div className='popup__links'>
           <NavLink

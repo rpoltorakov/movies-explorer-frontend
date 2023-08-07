@@ -5,9 +5,9 @@ import profileIcon from '../../images/profile-icon.svg'
 
 function Account() {
   return (
-    <Link className='header__account'>
-      <p className='header__accountText'>Аккаунт</p>
-      <img className='header__accountIcon' src={profileIcon} alt='' />
+    <Link className='account'>
+      <p className='account__text'>Аккаунт</p>
+      <img className='account__icon' src={profileIcon} alt='' />
     </Link>
   );
 }

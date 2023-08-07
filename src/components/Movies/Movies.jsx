@@ -6,12 +6,12 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Popup from '../Popup/Popup';
 
-function Movies() {
+function Movies({ isOpened, onClose, onClick }) {
   return (
     <div className='movies'>
-      <Header />
+      <Header onClick={onClick} />
 
-      <Popup />
+      <Popup isOpened={isOpened} onClose={onClose} />
       <SearchForm />
       <MoviesCardList />
 
