@@ -4,22 +4,23 @@ import photo from '../../images/default_avatar.png'
 
 function AboutMe() {
   return (
-    <section className='aboutMe'>
+    <section className='aboutMe' id='aboutMe'>
       <h2 className='aboutMe__title'>Студент</h2>
 
       <div className='aboutMe__columns'>
         <div className='aboutMe__column'>
           <h3 className='aboutMe__name'>Роман</h3>
           <p className='aboutMe__subtitle'>Фронтенд-разработчик, 25 лет</p>
-          <p className='aboutMe__text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore nulla pariatur. Excepteur sint occaecat non proident.</p>
-          <a className='aboutMe__link' href='#'>Github</a>
+          <p className='aboutMe__text'>Живу и работаю в Москве. Закончил факультет машиностроительных технологий в МГТУ им. Баумана. С 2021 года работаю в компании «Glowbyte» в практике BI на позиции BI-разработчика. С уходом зарубежных вендоров, начал активно заниматься веб-разработкой.</p>
+          <a
+            className='aboutMe__link'
+            href='https://github.com/rpoltorakov'
+            target='blank'
+          >Github</a>
         </div>
 
         <img className='aboutMe__photo' src={photo} alt="Фотография автора" />
       </div>
-      
-      
-
     </section>
   );
 }

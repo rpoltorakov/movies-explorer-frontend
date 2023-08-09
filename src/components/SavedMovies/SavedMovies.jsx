@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 
 function SavedMovies({ isOpened, onClose, onClick }) {
   return (
-    <section className='savedMovies'>
+    <main className='savedMovies'>
       <Header onClick={onClick} />
 
       <Popup isOpened={isOpened} onClose={onClose} />
@@ -16,7 +16,7 @@ function SavedMovies({ isOpened, onClose, onClick }) {
       <MoviesCardList />
 
       <Footer />
-    </section>
+    </main>
   );
 }
 

@@ -10,8 +10,16 @@ function Footer() {
         <p className='footer__copyright'>&copy; 2023</p>
 
         <nav className='footer__links'>
-          <a href='https://practicum.yandex.ru/' className='footer__link'>Яндекс.Практикум</a>
-          <a href='https://github.com/rpoltorakov/movies-explorer-frontend' className='footer__link'>Github</a>
+          <a
+            href='https://practicum.yandex.ru/'
+            className='footer__link'
+            target='blank'
+          >Яндекс.Практикум</a>
+          <a
+            href='https://github.com/rpoltorakov/movies-explorer-frontend'
+            className='footer__link'
+            target='blank'
+          >Github</a>
         </nav>
       </div>
     </footer>

@@ -6,14 +6,11 @@
   justify-content: space-between;
 }
 
-.navTab__logo {
-
-}
-
 .navTab__buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 30px
 }
 
 .navTab__button {
@@ -22,6 +19,12 @@
   border-radius: 3px;
   cursor: pointer;
   transition: opacity .15s linear;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  color: white;
+  text-decoration: none;
 }
 
 .navTab__button:hover {
@@ -29,10 +32,26 @@
 }
 
 .navTab__button_accent {
-  margin: 0 0 0 30px;
+  margin: 0;
   padding: 8px 20px 8px;
   background-color: #3DDC84;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: black;
+}
+
+@media screen and (max-width: 780px) {
+  .navTab {
+    padding: 18px 30px 18px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .navTab__button {
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+  }
 }

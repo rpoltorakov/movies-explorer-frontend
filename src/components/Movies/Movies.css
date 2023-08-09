@@ -23,12 +23,22 @@
   opacity: .7;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 780px) {
   .movies {
     padding: 0 30px 0;
   }
 
   .movies__buttonMore {
     margin: 80px 0 0;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .movies {
+    padding: 0 10px 0;
+  }
+
+  .movies__buttonMore {
+    font-size: 12px;
   }
 }

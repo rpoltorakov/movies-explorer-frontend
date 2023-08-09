@@ -25,10 +25,11 @@ function SearchForm() {
 
 
       <div className='searchForm__checkboxWrapper'>
-        <label className="searchForm__switch">
+        <label className="searchForm__switch" htmlFor='searchFormCheckbox'>
           <input
+            id='searchFormCheckbox'
             className="searchForm__checkbox"
-            type="checkbox" 
+            type="checkbox"
           />
           <span className="searchForm__slider" />
         </label>

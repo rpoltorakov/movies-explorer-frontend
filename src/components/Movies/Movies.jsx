@@ -8,7 +8,7 @@ import Popup from '../Popup/Popup';
 
 function Movies({ isOpened, onClose, onClick }) {
   return (
-    <div className='movies'>
+    <main className='movies'>
       <Header onClick={onClick} />
 
       <Popup isOpened={isOpened} onClose={onClose} />
@@ -18,7 +18,7 @@ function Movies({ isOpened, onClose, onClick }) {
       <button className='movies__buttonMore' type='button'>Ещё</button>
 
       <Footer />
-    </div>
+    </main>
   );
 }
 

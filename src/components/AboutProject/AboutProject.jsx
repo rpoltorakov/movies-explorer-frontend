@@ -3,7 +3,7 @@ import React from 'react'
 
 function AboutProject() {
   return (
-    <section className='aboutProject'>
+    <section className='aboutProject' id='aboutProject'>
       <h2 className='aboutProject__title'>О проекте</h2>
 
       <div className='aboutProject__info'>
@@ -17,7 +17,6 @@ function AboutProject() {
         <p className='aboutProject__progressBar aboutProject__progressBar_leftBar'>1 неделя</p>
         <p className='aboutProject__progressBar aboutProject__progressBar_rightBar'>4 недели</p>
         <p className='aboutProject__progressBar aboutProject__progressBar_leftSubtitle'>Back-end</p>
-        {/* aboutProject__progressBarSubtitle */}
         <p className='aboutProject__progressBar aboutProject__progressBar_rightSubtitle'>Front-end</p>
       </div>
     </section>

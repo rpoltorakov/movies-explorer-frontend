@@ -1,5 +1,6 @@
 .aboutProject {
   margin: 0 70px 0;
+  padding: 110px 0 0;
 }
 
 .aboutProject__title {
@@ -7,7 +8,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin: 110px 0 0;
+  margin: 0;
   padding: 0 0 23px;
   border-bottom: 1px solid #DADADA;
 }
@@ -72,6 +73,7 @@
   margin: 0;
   font-size: 14px;
   line-height: normal;
+  font-weight: 400;
   min-height: 36px;
 }
 
@@ -94,4 +96,61 @@
 .aboutProject__progressBar_rightSubtitle {
   color: #8B8B8B;
   grid-area: 2 / 2 / 3 / 6;
+}
+
+@media screen and (max-width: 780px) {
+  .aboutProject {
+    margin: 0 50px 0;
+    padding: 90px 0 0;
+  }
+
+  .aboutProject__info {
+    row-gap: 22px;
+  }
+
+  .aboutProject__progressBars {
+    margin: 83px 0 90px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .aboutProject {
+    margin: 0 18px 0;
+  }
+
+  .aboutProject__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .aboutProject__info {
+    display: block;
+  }
+
+  .aboutProject__subtitle {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .aboutProject__text {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    margin: 16px 0 0;
+  }
+
+  .aboutProject__subtitle_right {
+    margin: 56px 0 0;
+  }
+
+  .aboutProject__progressBars {
+    grid-template-columns: repeat(3, 1fr);
+    margin: 60px 0 60px;
+    row-gap: 0px;
+  }
+
+  .aboutProject__progressBar {
+    font-size: 11px;
+  }
 }

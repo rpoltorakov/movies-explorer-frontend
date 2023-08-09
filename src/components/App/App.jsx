@@ -5,6 +5,9 @@ import Main from '../Main/Main'
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -37,7 +40,22 @@ function App() {
 
         <Route
           path='/profile'
-          element={<Profile />}
+          element={<Profile isOpened={isPopupOpened} onClose={closePopup} onClick={handlePopupClick}/>}
+        />
+
+        <Route
+          path='/signup'
+          element={<Register />}
+        />
+
+        <Route 
+          path='/signin'
+          element={<Login />}
+        />
+
+        <Route
+          path='/*'
+          element={<NotFound />}
         />
       </Routes>
     </div>

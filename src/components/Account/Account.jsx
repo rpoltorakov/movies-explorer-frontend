@@ -5,7 +5,7 @@ import profileIcon from '../../images/profile-icon.svg'
 
 function Account() {
   return (
-    <Link className='account'>
+    <Link className='account' to='/profile'>
       <p className='account__text'>Аккаунт</p>
       <img className='account__icon' src={profileIcon} alt='' />
     </Link>
