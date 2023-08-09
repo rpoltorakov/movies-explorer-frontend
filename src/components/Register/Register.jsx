@@ -36,7 +36,7 @@ function Register() {
           className="register__input"
           placeholder='Введите пароль'
         />
-        <span className="register__input-error">asdasdas</span>
+        <span className="register__input-error">Что-то пошло не так...</span>
 
         <div className="register__wrapper">
           <button className="register__signupButton" type='submit'>
