@@ -5,6 +5,7 @@
   padding: 18px 70px 18px;
   align-items: center;
   max-height: 74px;
+  flex-shrink: 0;
 }
 
 .header__logo {
