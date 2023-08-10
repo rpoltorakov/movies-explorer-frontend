@@ -21,9 +21,10 @@ function Profile({ isOpened, onClose, onClick }) {
     <div className='profile'>
 
       <Header onClick={onClick} />
-      <Popup isOpened={isOpened} onClose={onClose} />
 
-      <form className='profile__section'>
+      <main className="profile__content">
+        <Popup isOpened={isOpened} onClose={onClose} />
+        <form className='profile__section'>
         <h2 className='profile__title'>Привет, Роман!</h2>          
 
           <div className="profile__wrapper">
@@ -33,6 +34,9 @@ function Profile({ isOpened, onClose, onClick }) {
               className="profile__input profile__input_bordered"
               placeholder='Роман'
               readOnly={!editMode}
+              minLength='2'
+              maxLength='200'
+              required
             />
             <label className="profile__inputName" htmlFor='profileEmail'>E-mail</label>
             <input
@@ -40,6 +44,9 @@ function Profile({ isOpened, onClose, onClick }) {
               className="profile__input"
               placeholder='pochta@yandex.ru'
               readOnly={!editMode}
+              minLength='2'
+              maxLength='200'
+              required
             />
           </div>
 
@@ -61,8 +68,9 @@ function Profile({ isOpened, onClose, onClick }) {
             }
             <button className="profile__button profile__signoutButton">Выйти из аккаунта</button>
           </div>
-      </form>
+        </form>
 
+      </main>
     </div>
   );
 }

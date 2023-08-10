@@ -6,10 +6,20 @@
   flex-direction: column;
   margin: 0 auto 0;
   align-items: center;
+  justify-content: center;
+}
+
+.register__content {
+  max-height: 560px;
+  height: 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 100%
 }
 
 .register__logo {
-  margin: 70px auto 40px 0;
+  margin: 0 auto 40px 0;
   transition: opacity .15s linear;
 }
 
@@ -30,6 +40,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
 }
 
 .register__input {
@@ -63,7 +75,7 @@
 }
 
 .register__wrapper {
-  margin: 69px 0 0;
+  margin: auto 0 0;
   display: flex;
   flex-direction: column;
 }
@@ -110,9 +122,13 @@
   opacity: .7;
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 440px) {
   .register {
-    max-width: 292px;
+    max-width: 260px;
+  }
+
+  .register__content {
+    max-height: 694px;
   }
 
   .register__form {
@@ -120,16 +136,20 @@
   }
 
   .register__logo {
-    margin: 56px auto 50px;
+    margin: 0 auto 50px;
   }
 
   .register__title {
     text-align: center;
     margin: 0;
-    padding-bottom: 80px;
+    padding-bottom: 60px;
   }
 
-  .register__wrapper {
-    margin-top: 167px;
+  .register__signupButton {
+    font-size: 12px;
+  }
+
+  .register__text {
+    font-size: 12px;
   }
 }

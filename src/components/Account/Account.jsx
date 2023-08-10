@@ -7,7 +7,7 @@ function Account() {
   return (
     <Link className='account' to='/profile'>
       <p className='account__text'>Аккаунт</p>
-      <img className='account__icon' src={profileIcon} alt='' />
+      <img className='account__icon' src={profileIcon} alt='Иконка кнопки "аккаунт"' />
     </Link>
   );
 }

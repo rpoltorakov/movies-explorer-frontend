@@ -8,17 +8,18 @@ import Popup from '../Popup/Popup';
 
 function Movies({ isOpened, onClose, onClick }) {
   return (
-    <main className='movies'>
+    <div className='movies'>
       <Header onClick={onClick} />
 
-      <Popup isOpened={isOpened} onClose={onClose} />
-      <SearchForm />
-      <MoviesCardList />
-
-      <button className='movies__buttonMore' type='button'>Ещё</button>
+      <main className='movies__wrapper'>
+        <Popup isOpened={isOpened} onClose={onClose} />
+        <SearchForm />
+        <MoviesCardList />
+        <button className='movies__buttonMore' type='button'>Ещё</button>
+      </main>
 
       <Footer />
-    </main>
+    </div>
   );
 }
 

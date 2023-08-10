@@ -11,9 +11,11 @@ function SavedMovies({ isOpened, onClose, onClick }) {
     <main className='savedMovies'>
       <Header onClick={onClick} />
 
-      <Popup isOpened={isOpened} onClose={onClose} />
-      <SearchForm />
-      <MoviesCardList />
+      <main className="savedMovies__wrapper">
+        <Popup isOpened={isOpened} onClose={onClose} />
+        <SearchForm />
+        <MoviesCardList />
+      </main>
 
       <Footer />
     </main>

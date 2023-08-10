@@ -61,18 +61,10 @@
   padding: 0;
 }
 
-.movies > .footer {
-  padding: 0 70px 20px;
-}
-
 @media screen and (max-width: 780px) {
   .footer {
     margin: 149px 0 0;
     padding: 0 30px 20px;
-  }
-
-  .movies > .footer {
-    padding: 0 0 20px;
   }
 }
 

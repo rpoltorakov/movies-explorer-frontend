@@ -18,6 +18,8 @@ function SearchForm() {
             placeholder='Фильм'
             required
             className='searchForm__input'
+            minLength='2'
+            maxLength='200'
           />
           <button className='searchForm__button' />
         </form>

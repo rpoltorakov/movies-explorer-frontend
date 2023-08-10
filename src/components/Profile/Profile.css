@@ -6,6 +6,11 @@
   flex-direction: column;
 }
 
+.profile__content {
+  display: flex;
+  flex-direction: column;
+}
+
 .profile__section {
   margin: 74px 0 0;
   padding: 0;
