@@ -1,0 +1,14 @@
+.savedMovies {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1280px;
+  margin: 0 auto 0;
+  /* padding: 0 70px 0; */
+}
+
+.savedMovies__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -1,0 +1,33 @@
+.account {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  transition: opacity .15s linear;
+}
+
+.account:hover {
+  opacity: .7;
+}
+
+.account__text {
+  color: white;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.account__icon {
+  background-color: #313131;
+  border-radius: 50px;
+  width: 26px;
+  height: 26px;
+  object-fit: none;
+}
