@@ -3,7 +3,23 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
-function Login() {
+function Login({ onLogin }) {
+  const [email, setEmail] = React.useState('pochta@yandex.ru');
+  const [password, setPassword] = React.useState('');
+
+  const handleChangeEmail = (e) => {
+    const {value} = e.target
+    setEmail(value)
+  }
+  const handleChangePassword = (e) => {
+    const {value} = e.target
+    setPassword(value)
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    onLogin(email, password)
+  }
+
   return (
     <main className='login'>
       <div className="login__content">
@@ -13,17 +29,19 @@ function Login() {
 
         <h2 className="login__title">Рады видеть!</h2>
 
-        <form className="login__form">
+        <form className="login__form" onSubmit={handleSubmit}>
 
           <label htmlFor="" className="login__input-label">E-mail</label>
           <input
             type="email"
             className="login__input"
-            defaultValue='pochta@yandex.ru'
+            // defaultValue='pochta@yandex.ru'
             placeholder='Введите почту'
             minLength='2'
             maxLength='200'
             required
+            value={email}
+            onChange={handleChangeEmail}
           />
 
           <label htmlFor="" className="login__input-label">Пароль</label>
@@ -34,6 +52,8 @@ function Login() {
             minLength='2'
             maxLength='200'
             required
+            value={password}
+            onChange={handleChangePassword}
           />
           <span className="login__input-error"></span>
 

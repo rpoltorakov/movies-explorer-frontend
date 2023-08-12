@@ -7,11 +7,12 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import NavTab from '../NavTab/NavTab';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
-function Main() {
+function Main({ loggedIn }) {
   return (
     <div className='main'>
-      <NavTab />
+      {loggedIn ? <Header /> : <NavTab />}
       <main>
         <Promo />
         <AboutProject />
