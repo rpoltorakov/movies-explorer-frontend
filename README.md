@@ -2,6 +2,10 @@
 
 Frontend для проекта movies-explorer
 
+### Ссылка на проект:
+
+  `https://moviexp.rpoltorakov.nomoredomains.xyz`
+
 #### Репозиторий Github
 `https://github.com/rpoltorakov/movies-explorer-frontend/`
 
