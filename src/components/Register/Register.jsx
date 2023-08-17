@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
-function Register({ onRegister }) {
+function Register({ onRegister, isError }) {
   const [email, setEmail] = React.useState('pochta@yandex.ru');
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('Роман')
@@ -75,7 +75,7 @@ function Register({ onRegister }) {
             value={password}
             onChange={handleChangePassword}
           />
-          <span className="register__input-error">Что-то пошло не так...</span>
+          {isError && <span className="register__input-error">Что-то пошло не так...</span>}
 
           <div className="register__wrapper">
             <button className="register__signupButton" type='submit'>

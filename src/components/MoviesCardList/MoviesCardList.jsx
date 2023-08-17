@@ -71,7 +71,7 @@ function MoviesCardList({
           ))
         }
       </div>
-      {!filteredMovies.length && <p className='movies__nothingFound'>Ничего не найдено</p>}
+      {!filteredMovies.length && !movies.length && <p className='moviesCardList__nothingFound'>Ничего не найдено</p>}
       {moviesLeft && <button className='movies__buttonMore' type='button' onClick={handleMore}>Ещё</button>}
     </section>
   );

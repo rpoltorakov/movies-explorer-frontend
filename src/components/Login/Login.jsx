@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
-function Login({ onLogin }) {
+function Login({ onLogin, isError }) {
   const [email, setEmail] = React.useState('pochta@yandex.ru');
   const [password, setPassword] = React.useState('');
 
@@ -56,6 +56,7 @@ function Login({ onLogin }) {
             onChange={handleChangePassword}
           />
           <span className="login__input-error"></span>
+          {isError && <span className="register__input-error">Что-то пошло не так...</span>}
 
           <div className="login__wrapper">
             <button className="login__signinButton" type='submit'>
