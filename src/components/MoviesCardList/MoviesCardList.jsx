@@ -23,11 +23,7 @@ function MoviesCardList({
   const [moviesLeft, setMoviesLeft] = React.useState(movies.length > cardsMaxCount);
   
   async function updateWidth() {
-    try {
-      await setTimeout(() => {setWidth(window.innerWidth)}, 100);
-    } catch(err) {
-      console.error('error', err)
-    }
+    setTimeout(() => {setWidth(window.innerWidth)}, 100);
   }
 
   React.useEffect(() => {
@@ -70,12 +66,12 @@ function MoviesCardList({
               deleteMovie={deleteMovie}
               saveMovie={saveMovie}
               saved={movie}
-              // isLiked={savedMovies.some(savedMovie => savedMovie.movieId === movie.id)}
               savedMovies={savedMovies}
             />
           ))
         }
       </div>
+      {!filteredMovies.length && <p className='movies__nothingFound'>Ничего не найдено</p>}
       {moviesLeft && <button className='movies__buttonMore' type='button' onClick={handleMore}>Ещё</button>}
     </section>
   );

@@ -24,6 +24,10 @@
   object-fit: contain;
 }
 
+.moviesCard__image-link:hover {
+  transform: scale(1.03);
+}
+
 .moviesCard__title {
   margin: 0;
   padding: 0 10px 0 18px;

@@ -16,6 +16,13 @@
   justify-content: center;
 }
 
+.movies__nothingFound {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #EE3465;
+}
+
 @media screen and (max-width: 890px) {
   .moviesCardList {
     padding: 0;

@@ -10,8 +10,6 @@ function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleChe
     if (searchValue) {
       onSearch(searchValue, checkbox)
       setError('')
-    } else {
-      setError('todo: error')
     }
   }
 

@@ -60,9 +60,9 @@ function MoviesCard({ movie, deleteMovie, saveMovie, savedMovies }) {
         <h3 className='moviesCard__title'>{movie.nameRU}</h3>
         <p className='moviesCard__length'>{formatDuration(movie.duration)}</p>
       </div>
-
-      <img className='moviesCard__image' src={movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : movie.image} alt={movie.nameRU} />
-
+      <a className="moviesCard__image-link" href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img className='moviesCard__image' src={movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : movie.image} alt={movie.nameRU} />
+      </a>
       {location.pathname === "/movies" ? (
         <button 
           className={`moviesCard__button ${isSaved ? 'moviesCard__button_saved' : ''}`} 
