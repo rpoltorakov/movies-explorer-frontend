@@ -1,37 +1,63 @@
-import './App.css';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Main from '../Main/Main'
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile';
-import Register from '../Register/Register';
+import { useEffect, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import mainApi from '../../utils/MainApi';
+import moviesApi from '../../utils/MoviesApi';
+import { filterMovies } from '../../utils/utils';
 import Login from '../Login/Login';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
 import NotFound from '../NotFound/NotFound';
-import moviesApi from '../../utils/MoviesApi'
-import mainApi from '../../utils/MainApi'
+import Profile from '../Profile/Profile';
+import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
+import Register from '../Register/Register';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import './App.css';
 
 function App() {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
-  const [isShortMoviesSelected, setIsShortMoviesSelected] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [searchValue, setSearchValue] = useState('');
+  const [checkbox, setCheckbox] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchValueSaved, setSearchValueSaved] = useState('');
+  const [profileError, setProfileError] = useState(false);
 
   const navigate = useNavigate();
 
+  async function handleUserCheck() {
+    try {
+      if (localStorage.getItem('loggedIn')) {
+        const user = await mainApi.getCurrentUser()
+        setCurrentUser(user.user)
+        setLoggedIn(true)
+        setIsLoading(true)
+        const downloadedSavedMovies = await mainApi.getMovies()
+        setSavedMovies(downloadedSavedMovies)
+        setIsLoading(false)
+        setSearchValue(localStorage.getItem('cachedQuery'))
+        setCheckbox(localStorage.getItem('lastCheckbox') === 'true')
+      }
+    } catch(err) {
+      console.error('error', err)
+    }
+    
+  } 
+
   useEffect(() => {
+    handleUserCheck()
+  }, [navigate])
 
-  })
-
-  // get user info
   useEffect(() => {
     if (loggedIn) {
       mainApi.getCurrentUser()
         .then((user) => {
-          console.log("🚀 ~ user in effect:", user)
-          setCurrentUser(user)
+          setCurrentUser(user.user)
         })
-        .catch(err => {console.log(err)})
+        .catch(err => {console.error(err)})
     }
   }, [loggedIn])
 
@@ -40,73 +66,226 @@ function App() {
       .then(() => {
         navigate('/signin', { replace: true })
       })
-      .catch(err => {console.log(err)})
+      .catch(err => {console.error(err)})
   }
-
   function handleLogin(email, password) {
     if (!email || !password) {
       return
     }
     mainApi.signin({ email, password })
       .then(() => {
+        localStorage.setItem('loggedIn', true)
         setLoggedIn(true)
-        navigate('/')
+        navigate('/movies')
       })
       .catch(err => {
-        // setTooltipOpen(true)
-        // setIsRegisterSuccess(false)
-        // setAuthMessage('smth gone wrong...')
-        console.log(err)
+        console.error(err)
+      })
+  }
+  function handleLogout() {
+    mainApi.signout()
+      .then(() => {
+        setLoggedIn(false)
+        localStorage.clear()
+      })
+      .catch(err => {
+        console.error(err)
       })
   }
 
   function closePopup() {
     setIsPopupOpened(false)
   }
-
   function handlePopupClick() {
-    setIsPopupOpened(true)
+    setIsPopupOpened(!isPopupOpened)
+  }
+
+  async function saveMovie(movie) {
+    try {
+      const saved = await mainApi.createMovie(movie)
+      setSavedMovies([...savedMovies, saved])  
+    } catch(err) {
+      console.error('error', err)
+    }
+    
+  }
+
+  async function deleteMovie(movie) {
+    try {
+      const deletedMovie = await mainApi.deleteMovie(movie)
+      setSavedMovies(savedMovies.filter(m => m._id !== deletedMovie._id))
+    } catch(err) {
+      console.error('error', err)
+    }
+  }
+
+  async function handleSearch(query, checkbox) {
+    try {
+      setIsLoading(true)
+      const downloadedMovies = await moviesApi.getMoviesList()
+      localStorage.setItem('cachedQuery', query)
+      localStorage.setItem('lastCheckbox', JSON.stringify(checkbox))
+      localStorage.setItem('cachedMovies', JSON.stringify(downloadedMovies))
+      setFoundMovies(filterMovies(query, downloadedMovies, checkbox))
+      setIsLoading(false)
+    } catch(err) {
+      console.error('error', err)
+    }
+  }
+
+  async function handleSearchSaved(query) {
+    const downloadedSavedMovies = await mainApi.getMovies()
+    setSavedMovies(filterMovies(query, downloadedSavedMovies, checkbox))
+  }
+
+  async function handleCheckboxChange(checkbox) {
+    try {
+      setCheckbox(checkbox)
+      const downloadedMovies = JSON.parse(localStorage.getItem('cachedMovies'))
+      setFoundMovies(filterMovies(searchValue, downloadedMovies, checkbox))
+      const downloadedSavedMovies = await mainApi.getMovies()
+      setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
+    } catch (err) {
+      console.error('error', err)
+    }
+  }
+
+  function onMoviesMount() {
+    const cachedMovies = JSON.parse(localStorage.getItem('cachedMovies'))
+    const cachedQuery = localStorage.getItem('cachedQuery')
+    if (cachedMovies && cachedQuery) {
+      setFoundMovies(filterMovies(cachedQuery, cachedMovies, checkbox))
+    }
+  }
+  async function onSavedMoviesMount() {
+    try {
+      const downloadedSavedMovies = await mainApi.getMovies()
+      setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
+    } catch(err) {
+      console.error('error', err)
+    }
+  }
+
+  async function handlePatchUser(data) {
+    try {
+      const newCurrentUser = await mainApi.patchCurrentUser(data)
+      setCurrentUser(newCurrentUser)
+      setProfileError(false)
+    } catch(err) {
+      setProfileError(true)
+      console.error('error', err)
+    }
   }
 
   return (
-    <div className="page">
-      <Routes>
-        <Route
-          path='/'
-          element={<Main loggedIn={loggedIn} />}
-        />
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <Main
+                loggedIn={loggedIn}
+                isOpened={isPopupOpened}
+                onClose={closePopup}
+                onClick={handlePopupClick}
+              />
+            }
+          />
 
-        <Route 
-          path='/movies' 
-          element={<Movies isOpened={isPopupOpened} onClose={closePopup} onClick={handlePopupClick} />} 
-        />
+          <Route 
+            path='/movies' 
+            element={
+              <ProtectedRouteElement
+                element={Movies}
+                loggedIn={loggedIn}
+                
+                onMount={onMoviesMount}
 
-        <Route
-          path='/saved-movies'
-          element={<SavedMovies isOpened={isPopupOpened} onClose={closePopup} onClick={handlePopupClick} />}
-        />
+                isOpened={isPopupOpened}
+                onClose={closePopup}
+                onClick={handlePopupClick}
 
-        <Route
-          path='/profile'
-          element={<Profile isOpened={isPopupOpened} onClose={closePopup} onClick={handlePopupClick}/>}
-        />
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                checkbox={checkbox}
+                handleCheckboxChange={handleCheckboxChange}
+                onSearch={handleSearch}
 
-        <Route
-          path='/signup'
-          element={<Register onRegister={handleRegister} />}
-        />
+                movies={foundMovies}
+                savedMovies={savedMovies}
+                saveMovie={saveMovie}
+                deleteMovie={deleteMovie}
 
-        <Route 
-          path='/signin'
-          element={<Login onLogin={handleLogin} />}
-        />
+                isLoading={isLoading}
+              />
+            } 
+          />
 
-        <Route
-          path='/*'
-          element={<NotFound />}
-        />
-      </Routes>
-    </div>
+          <Route
+            path='/saved-movies'
+            element={
+              <ProtectedRouteElement
+                element={SavedMovies}
+                loggedIn={loggedIn}
+
+                onMount={onSavedMoviesMount}
+
+                isOpened={isPopupOpened}
+                onClose={closePopup}
+                onClick={handlePopupClick}
+                
+                savedMovies={savedMovies}
+                deleteMovie={deleteMovie}
+
+                searchValueSaved={searchValueSaved}
+                setSearchValueSaved={setSearchValueSaved}
+                checkbox={checkbox}
+                handleCheckboxChange={handleCheckboxChange}
+                onSearch={handleSearchSaved}
+              />
+            }
+          />
+
+          <Route
+            path='/profile'
+            element={
+              <ProtectedRouteElement 
+                element={Profile}
+                isOpened={isPopupOpened}
+                onClose={closePopup}
+                onClick={handlePopupClick}
+                onLogout={handleLogout}
+                loggedIn={loggedIn}
+
+                handlePatchUser={handlePatchUser}
+
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+
+                profileError={profileError}
+                setProfileError={setProfileError}
+              />
+            }
+          />
+
+          <Route
+            path='/signup'
+            element={<Register onRegister={handleRegister} />}
+          />
+
+          <Route 
+            path='/signin'
+            element={<Login onLogin={handleLogin} loggedIn={loggedIn} />}
+          />
+
+          <Route
+            path='/*'
+            element={<NotFound />}
+          />
+        </Routes>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

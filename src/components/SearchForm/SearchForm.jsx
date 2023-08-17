@@ -2,12 +2,32 @@ import './SearchForm.css'
 import React from 'react'
 import searchIcon from '../../images/search-icon.svg'
 
-function SearchForm() {
+function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleCheckboxChange }) {
+  const [error, setError] = React.useState('');
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (searchValue) {
+      onSearch(searchValue, checkbox)
+      setError('')
+    } else {
+      setError('todo: error')
+    }
+  }
+
+  function handleSearchValueChange(evt) {
+    setSearchValue(evt.target.value)
+  }
+  function onCheckboxChange(evt) {
+    handleCheckboxChange(evt.target.checked)
+    localStorage.setItem('lastCheckbox', evt.target.checked)
+  }
+
   return (
     <section className='searchForm'>
 
       <div className='searchForm__searchStringWrapper'>
-        <form className='searchForm__searchString'>
+        <form className='searchForm__searchString' onSubmit={handleSubmit}>
           <img
             className='searchForm__icon'
             src={searchIcon}
@@ -16,10 +36,9 @@ function SearchForm() {
           <input
             type='text'
             placeholder='Фильм'
-            required
             className='searchForm__input'
-            minLength='2'
-            maxLength='200'
+            value={searchValue}
+            onChange={handleSearchValueChange}
           />
           <button className='searchForm__button' />
         </form>
@@ -32,6 +51,9 @@ function SearchForm() {
             id='searchFormCheckbox'
             className="searchForm__checkbox"
             type="checkbox"
+            // value={true}
+            checked={checkbox}
+            onChange={onCheckboxChange}
           />
           <span className="searchForm__slider" />
         </label>
