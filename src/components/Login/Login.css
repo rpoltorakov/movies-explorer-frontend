@@ -132,6 +132,14 @@
   opacity: .7;
 }
 
+.login__error {
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 @media screen and (max-width: 440px) {
   .login {
     max-width: 260px;

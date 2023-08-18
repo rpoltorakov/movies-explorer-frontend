@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
-function Login({ onLogin, isError }) {
+function Login({ onLogin, isError, setIsLoginError }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -13,6 +13,7 @@ function Login({ onLogin, isError }) {
   const [submitAllowed, setSubmitAllowed] = React.useState(false)
 
   React.useEffect(() => {
+    setIsLoginError(false)
     if (!passwordError && !emailError) {
       setSubmitAllowed(true)
     } else if (passwordError || emailError) {
@@ -85,6 +86,8 @@ function Login({ onLogin, isError }) {
             />
             {passwordError && <span className="login__input-error">{passwordError}</span>}
           </label>
+          
+          {isError && <span className="login__error">Что-то пошло не так...</span>}
 
           <div className="login__wrapper">
             <button

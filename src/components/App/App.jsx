@@ -25,7 +25,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchValueSaved, setSearchValueSaved] = useState('');
   const [profileError, setProfileError] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isLoginError, setIsLoginError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -65,12 +65,12 @@ function App() {
   function handleRegister(name, email, password) {
     mainApi.signup({ name, email, password })
       .then(() => {
-        setIsError(false)
+        // setIsLoginError(false)
         navigate('/signin', { replace: true })
       })
       .catch(err => {
         console.error(err)
-        setIsError(true)
+        // setIsLoginError(true)
       })
   }
   function handleLogin(email, password) {
@@ -82,11 +82,12 @@ function App() {
         localStorage.setItem('loggedIn', true)
         setLoggedIn(true)
         navigate('/movies')
-        setIsError(false)
+        setIsLoginError(false)
       })
       .catch(err => {
+        console.log('isLoginError:', isLoginError)
         console.error(err)
-        setIsError(true)
+        setIsLoginError(true)
       })
   }
   function handleLogout() {
@@ -278,12 +279,19 @@ function App() {
 
           <Route
             path='/signup'
-            element={<Register onRegister={handleRegister} isError={isError} />}
+            element={<Register onRegister={handleRegister} isError={isLoginError} />}
           />
 
           <Route 
             path='/signin'
-            element={<Login onLogin={handleLogin} loggedIn={loggedIn} isError={isError} />}
+            element={
+              <Login
+                onLogin={handleLogin}
+                loggedIn={loggedIn}
+                isError={isLoginError}
+                setIsLoginError={setIsLoginError}
+              />
+            }
           />
 
           <Route
