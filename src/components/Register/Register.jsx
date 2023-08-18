@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
 function Register({ onRegister, isError }) {
-  const [email, setEmail] = React.useState('pochta@yandex.ru');
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [name, setName] = React.useState('Роман')
+  const [name, setName] = React.useState('')
 
   const handleChangeEmail = (e) => {
     const {value} = e.target
@@ -42,7 +42,6 @@ function Register({ onRegister, isError }) {
           <input
             type="text"
             className="register__input"
-            // defaultValue='Роман'
             placeholder='Введите имя'
             minLength='2'
             maxLength='200'
@@ -55,7 +54,6 @@ function Register({ onRegister, isError }) {
           <input
             type="email"
             className="register__input"
-            // defaultValue='pochta@yandex.ru'
             placeholder='Введите почту'
             minLength='2'
             maxLength='200'

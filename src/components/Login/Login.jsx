@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
 function Login({ onLogin, isError }) {
-  const [email, setEmail] = React.useState('pochta@yandex.ru');
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const handleChangeEmail = (e) => {
@@ -35,7 +35,6 @@ function Login({ onLogin, isError }) {
           <input
             type="email"
             className="login__input"
-            // defaultValue='pochta@yandex.ru'
             placeholder='Введите почту'
             minLength='2'
             maxLength='200'
