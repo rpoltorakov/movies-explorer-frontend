@@ -65,12 +65,10 @@ function App() {
   function handleRegister(name, email, password) {
     mainApi.signup({ name, email, password })
       .then(() => {
-        // setIsLoginError(false)
         navigate('/signin', { replace: true })
       })
       .catch(err => {
         console.error(err)
-        // setIsLoginError(true)
       })
   }
   function handleLogin(email, password) {
