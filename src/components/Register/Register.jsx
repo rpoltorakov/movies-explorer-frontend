@@ -69,11 +69,10 @@ function Register({ onRegister, isError }) {
             type="text"
             className="register__input"
             placeholder='Введите имя'
-            // required
             value={name}
             onChange={handleChangeName}
           />
-          {nameError && <span className="register__input-error">Что-то пошло не так...</span>}
+          {nameError && <span className="register__input-error">{nameError}</span>}
 
           <label htmlFor="" className="register__input-label">E-mail</label>
           <input
@@ -82,20 +81,17 @@ function Register({ onRegister, isError }) {
             value={email}
             onChange={handleChangeEmail}
           />
-          {emailError && <span className="register__input-error">Что-то пошло не так...</span>}
+          {emailError && <span className="register__input-error">{emailError}</span>}
 
           <label htmlFor="" className="register__input-label">Пароль</label>
           <input
             type="password"
             className="register__input"
             placeholder='Введите пароль'
-            // minLength='2'
-            // maxLength='200'
-            // required
             value={password}
             onChange={handleChangePassword}
           />
-          {passwordError && <span className="register__input-error">Что-то пошло не так...</span>}
+          {passwordError && <span className="register__input-error">{passwordError}</span>}
 
           <div className="register__wrapper">
             <button className="register__signupButton" type='submit'>
