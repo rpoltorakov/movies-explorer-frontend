@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import mainApi from '../../utils/MainApi';
 import Header from '../Header/Header';
 import Popup from '../Popup/Popup';
 import './Profile.css';

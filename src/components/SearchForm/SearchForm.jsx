@@ -3,13 +3,11 @@ import React from 'react'
 import searchIcon from '../../images/search-icon.svg'
 
 function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleCheckboxChange }) {
-  const [error, setError] = React.useState('');
 
   function handleSubmit(evt) {
     evt.preventDefault();
     if (searchValue) {
       onSearch(searchValue, checkbox)
-      setError('')
     }
   }
 
@@ -49,7 +47,6 @@ function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleChe
             id='searchFormCheckbox'
             className="searchForm__checkbox"
             type="checkbox"
-            // value={true}
             checked={checkbox}
             onChange={onCheckboxChange}
           />
