@@ -57,8 +57,8 @@ function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrent
       setNameError('Имя должно быть на кириллице')
     } else {
       setNameError('')
+      setName(newName)
     }
-    setName(newName)
   }
   function handleEmailChange(evt) {
     const newEmail = evt.target.value
@@ -66,8 +66,8 @@ function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrent
       setEmailError('Введите верный формат почты')
     } else {
       setEmailError('')
+      setEmail(newEmail)
     }
-    setEmail(newEmail)
   }
 
   return (

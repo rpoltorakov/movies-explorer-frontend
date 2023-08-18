@@ -8,21 +8,47 @@ function Register({ onRegister, isError }) {
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('')
 
-  const handleChangeEmail = (e) => {
-    const {value} = e.target
-    setEmail(value)
+  const [nameError, setNameError] = React.useState('')
+  const [emailError, setEmailError] = React.useState('')
+  const [passwordError, setPasswordError] = React.useState('')
+  
+
+  const handleChangeEmail = (evt) => {
+    const newEmail = evt.target.value
+    if ( !(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i.test(newEmail)) ) {
+      setEmailError('Введите верный формат почты')
+    } else {
+      setEmailError('')
+      setEmail(newEmail)
+    }
   }
-  const handleChangePassword = (e) => {
-    const {value} = e.target
-    setPassword(value)
+  const handleChangePassword = (evt) => {
+    const newPassword = evt.target.value
+    if (newPassword.length < 6) {
+      setPasswordError('Пароль должен быть не короче 6 симв.')
+    } else if (newPassword.length > 40) {
+      setPasswordError('Пароль должен быть короче 40 симв.')
+    } else {
+      setPasswordError('')
+      setPassword(newPassword)
+    }
   }
-  const handleChangeName = (e) => {
-    const {value} = e.target
-    setName(value)
+  const handleChangeName = (evt) => {
+    const newName = evt.target.value
+    if (newName.length < 2) {
+      setNameError('Имя должно быть не короче 2 симв.')
+    } else if (newName.length > 40) {
+      setNameError('Имя должно быть короче 40 симв.')
+    } else if (/^[a-zA-Z- ]+$/.test(newName)) {
+      setNameError('Имя должно быть на кириллице')
+    } else {
+      setNameError('')
+      setName(newName)
+    }
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
     onRegister(name, email, password)
   }
 
@@ -43,37 +69,33 @@ function Register({ onRegister, isError }) {
             type="text"
             className="register__input"
             placeholder='Введите имя'
-            minLength='2'
-            maxLength='200'
-            required
+            // required
             value={name}
             onChange={handleChangeName}
           />
+          {nameError && <span className="register__input-error">Что-то пошло не так...</span>}
 
           <label htmlFor="" className="register__input-label">E-mail</label>
           <input
-            type="email"
             className="register__input"
             placeholder='Введите почту'
-            minLength='2'
-            maxLength='200'
-            required
             value={email}
             onChange={handleChangeEmail}
           />
+          {emailError && <span className="register__input-error">Что-то пошло не так...</span>}
 
           <label htmlFor="" className="register__input-label">Пароль</label>
           <input
             type="password"
             className="register__input"
             placeholder='Введите пароль'
-            minLength='2'
-            maxLength='200'
-            required
+            // minLength='2'
+            // maxLength='200'
+            // required
             value={password}
             onChange={handleChangePassword}
           />
-          {isError && <span className="register__input-error">Что-то пошло не так...</span>}
+          {passwordError && <span className="register__input-error">Что-то пошло не так...</span>}
 
           <div className="register__wrapper">
             <button className="register__signupButton" type='submit'>
