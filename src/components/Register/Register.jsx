@@ -12,30 +12,44 @@ function Register({ onRegister, isError }) {
   const [emailError, setEmailError] = React.useState('')
   const [passwordError, setPasswordError] = React.useState('')
   
+  const [submitAllowed, setSubmitAllowed] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!passwordError && !emailError && !nameError) {
+      setSubmitAllowed(true)
+    } else if (passwordError || emailError || nameError) {
+      setSubmitAllowed(false)
+    }
+    if (password.length === 0 || email.length === 0 || name.length === 0) {
+      setSubmitAllowed(false)
+    }
+  }, [nameError, emailError, passwordError, password, email, name])
 
   const handleChangeEmail = (evt) => {
     const newEmail = evt.target.value
-    if ( !(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i.test(newEmail)) ) {
+    if (newEmail.length === 0) {
+      setEmailError('')
+    } else if ( !(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i.test(newEmail)) ) {
       setEmailError('Введите верный формат почты')
     } else {
       setEmailError('')
-      setEmail(newEmail)
     }
+    setEmail(newEmail)
   }
   const handleChangePassword = (evt) => {
     const newPassword = evt.target.value
-    if (newPassword.length < 6) {
+    if (newPassword.length < 6 && newPassword.length !== 0) {
       setPasswordError('Пароль должен быть не короче 6 симв.')
     } else if (newPassword.length > 40) {
       setPasswordError('Пароль должен быть короче 40 симв.')
     } else {
       setPasswordError('')
-      setPassword(newPassword)
     }
+    setPassword(newPassword)
   }
   const handleChangeName = (evt) => {
     const newName = evt.target.value
-    if (newName.length < 2) {
+    if (newName.length < 2 && newName.length !== 0) {
       setNameError('Имя должно быть не короче 2 симв.')
     } else if (newName.length > 40) {
       setNameError('Имя должно быть короче 40 симв.')
@@ -43,8 +57,8 @@ function Register({ onRegister, isError }) {
       setNameError('Имя должно быть на кириллице')
     } else {
       setNameError('')
-      setName(newName)
     }
+    setName(newName)
   }
 
   const handleSubmit = (evt) => {
@@ -64,37 +78,47 @@ function Register({ onRegister, isError }) {
 
         <form className="register__form" onSubmit={handleSubmit}>
 
-          <label htmlFor="" className="register__input-label">Имя</label>
-          <input
-            type="text"
-            className="register__input"
-            placeholder='Введите имя'
-            value={name}
-            onChange={handleChangeName}
-          />
-          {nameError && <span className="register__input-error">{nameError}</span>}
+          <label htmlFor="" className="register__input-label">
+            Имя
+            <input
+              type="text"
+              className="register__input"
+              placeholder='Введите имя'
+              value={name}
+              onChange={handleChangeName}
+            />
+            {nameError && <span className="register__input-error">{nameError}</span>}
+          </label>
 
-          <label htmlFor="" className="register__input-label">E-mail</label>
-          <input
-            className="register__input"
-            placeholder='Введите почту'
-            value={email}
-            onChange={handleChangeEmail}
-          />
-          {emailError && <span className="register__input-error">{emailError}</span>}
+          <label htmlFor="" className="register__input-label">
+            E-mail
+            <input
+              className="register__input"
+              placeholder='Введите почту'
+              value={email}
+              onChange={handleChangeEmail}
+            />
+            {emailError && <span className="register__input-error">{emailError}</span>}
+          </label>
 
-          <label htmlFor="" className="register__input-label">Пароль</label>
-          <input
-            type="password"
-            className="register__input"
-            placeholder='Введите пароль'
-            value={password}
-            onChange={handleChangePassword}
-          />
-          {passwordError && <span className="register__input-error">{passwordError}</span>}
+          <label htmlFor="" className="register__input-label">
+            Пароль
+            <input
+              type="password"
+              className="register__input"
+              placeholder='Введите пароль'
+              value={password}
+              onChange={handleChangePassword}
+            />
+            {passwordError && <span className="register__input-error">{passwordError}</span>}
+          </label>
 
           <div className="register__wrapper">
-            <button className="register__signupButton" type='submit'>
+            <button 
+              className={`register__signupButton ${submitAllowed ? 'register__signupButton_active' : ''}`}
+              type='submit'
+              disabled={!submitAllowed}
+            >
               Зарегистрироваться
             </button>
             <p className="register__text">
