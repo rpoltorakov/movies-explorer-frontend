@@ -1,3 +1,5 @@
+const SHORT_MOVIES_LENGTH = 40
+
 const WIDTH_S = 725
 const WIDTH_M = 1153
 
@@ -9,6 +11,7 @@ const CARDS_STEP_S = 2
 const CARDS_STEP_M = 3
 
 export {
+  SHORT_MOVIES_LENGTH,
   WIDTH_S,
   WIDTH_M,
   CARDS_COUNT_S,

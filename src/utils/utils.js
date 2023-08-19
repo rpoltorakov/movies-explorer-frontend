@@ -1,3 +1,5 @@
+import { SHORT_MOVIES_LENGTH } from "./constants"
+
 function filterMovies(query, movies, checkbox) {
   if (!checkbox) {
     return movies.filter((movie) => (
@@ -6,8 +8,8 @@ function filterMovies(query, movies, checkbox) {
     ))
   } else {
     return movies.filter((movie) => (
-      (movie.nameRU.toLowerCase().trim().includes(query.toLowerCase()) && movie.duration <= 40) ||
-      (movie.nameEN.toLowerCase().trim().includes(query.toLowerCase()) && movie.duration <= 40)
+      (movie.nameRU.toLowerCase().trim().includes(query.toLowerCase()) && movie.duration <= SHORT_MOVIES_LENGTH) ||
+      (movie.nameEN.toLowerCase().trim().includes(query.toLowerCase()) && movie.duration <= SHORT_MOVIES_LENGTH)
     ))
   }
 }
