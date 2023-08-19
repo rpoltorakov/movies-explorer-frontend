@@ -28,6 +28,7 @@ function App() {
   const [isLoginError, setIsLoginError] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
   const [profileChanged, setProfileChanged] = useState(false);
+  const [isSearchError, setIsSearchError] = useState(false)
 
   const navigate = useNavigate();
 
@@ -139,21 +140,30 @@ function App() {
   }
 
   async function handleSearch(query, checkbox) {
+    console.log('query:', query)
+    console.log('query.length:', query.length)
+    console.log('checkbox:', checkbox)
     try {
-      await mainApi.getCurrentUser()
-      setIsLoading(true)
-      const downloadedMovies = await moviesApi.getMoviesList()
-      localStorage.setItem('cachedQuery', query)
-      localStorage.setItem('lastCheckbox', JSON.stringify(checkbox))
-      localStorage.setItem('cachedMovies', JSON.stringify(downloadedMovies))
-      const filteredMovies = filterMovies(query, downloadedMovies, checkbox)
-      setFoundMovies(filteredMovies)
-      if (filteredMovies.length === 0) {
-        setMoviesNotFound(true)
+      if (query.length !== 0) {
+        await mainApi.getCurrentUser()
+        setIsLoading(true)
+        const downloadedMovies = await moviesApi.getMoviesList()
+        localStorage.setItem('cachedQuery', query)
+        localStorage.setItem('lastCheckbox', JSON.stringify(checkbox))
+        localStorage.setItem('cachedMovies', JSON.stringify(downloadedMovies))
+        const filteredMovies = filterMovies(query, downloadedMovies, checkbox)
+        setFoundMovies(filteredMovies)
+        if (filteredMovies.length === 0) {
+          setMoviesNotFound(true)
+        } else {
+          setMoviesNotFound(false)
+        }
+        setIsLoading(false)
+        setIsSearchError(false)
+        return
       } else {
-        setMoviesNotFound(false)
+        setIsSearchError(true)
       }
-      setIsLoading(false)
     } catch(err) {
       if (err === 401) {
         setLoggedIn(false)
@@ -186,12 +196,12 @@ function App() {
     const cachedQuery = localStorage.getItem('cachedQuery')
     if (cachedMovies && cachedQuery) {
       setFoundMovies(filterMovies(cachedQuery, cachedMovies, checkbox))
+      setIsSearchError(false)
     }
   }
   async function onSavedMoviesMount() {
     try {
       const downloadedSavedMovies = await mainApi.getMovies()
-      // setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
       setSavedMovies(downloadedSavedMovies)
     } catch(err) {
       if (err === 401) {
@@ -205,10 +215,12 @@ function App() {
 
   async function handlePatchUser(data) {
     try {
+      setIsLoading(true)
       const newCurrentUser = await mainApi.patchCurrentUser(data)
       setCurrentUser(newCurrentUser)
       setProfileError(false)
       setProfileChanged(true)
+      setIsLoading(false)
     } catch(err) {
       setProfileError(true)
       setProfileChanged(false)
@@ -250,6 +262,7 @@ function App() {
                 checkbox={checkbox}
                 handleCheckboxChange={handleCheckboxChange}
                 onSearch={handleSearch}
+                isSearchError={isSearchError}
 
                 movies={foundMovies}
                 savedMovies={savedMovies}
@@ -306,6 +319,9 @@ function App() {
                 profileError={profileError}
                 setProfileError={setProfileError}
                 profileChangedMessage={profileChanged}
+
+                isLoading={isLoading}
+                setProfileChanged={setProfileChanged}
               />
             }
           />

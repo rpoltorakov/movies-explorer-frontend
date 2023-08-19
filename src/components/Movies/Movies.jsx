@@ -28,7 +28,8 @@ function Movies({
   filteredMovies,
   moviesNotFound,
 
-  isLoading
+  isLoading,
+  isSearchError
 }) {
   React.useEffect(() => {
     onMount()
@@ -45,6 +46,7 @@ function Movies({
           onSearch={onSearch}
           checkbox={checkbox}
           handleCheckboxChange={handleCheckboxChange}
+          isSearchError={isSearchError}
         />
         <MoviesCardList 
           movies={movies}

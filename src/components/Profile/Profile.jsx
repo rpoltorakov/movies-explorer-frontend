@@ -5,7 +5,7 @@ import Popup from '../Popup/Popup';
 import './Profile.css';
 
 
-function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrentUser, profileError, setProfileError, handlePatchUser, profileChangedMessage }) {
+function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrentUser, profileError, setProfileError, handlePatchUser, profileChangedMessage,setProfileChanged, isLoading }) {
   const [editMode, setEditMode] = React.useState(false);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -16,6 +16,7 @@ function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrent
   function handleProfileEditButton(evt) {
     evt.preventDefault()
     setEditMode(true)
+    setProfileChanged(false)
   }
 
   async function handleProfileSubmit(evt) {
@@ -77,14 +78,14 @@ function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrent
       
       <form id='profile' className='profile__section' onSubmit={handleProfileSubmit}>
 
-        <h2 className='profile__title'>Привет, {currentUser.name}!</h2>          
+        <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
 
         <div className="profile__wrapper">
           <label className="profile__inputName profile__input_bordered" htmlFor='profileName'>Имя</label>
           <input
             id='profileName'
             className="profile__input profile__input_bordered"
-            readOnly={!editMode}
+            readOnly={!editMode && !isLoading}
             value={name}
             onChange={handleNameChange}
           />
@@ -92,7 +93,7 @@ function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrent
           <input
             id='profileEmail'
             className="profile__input"
-            readOnly={!editMode}
+            readOnly={!editMode && !isLoading}
             value={email}
             onChange={handleEmailChange}
           />
@@ -110,13 +111,14 @@ function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrent
                 <button
                   className={`profile__button ${valuesChanged && !nameError && !emailError ? 'profile__saveButton' : ''}`}
                   type='submit'
-                  disabled={!valuesChanged || nameError || emailError}
+                  disabled={!valuesChanged || nameError || emailError || isLoading}
                 >Сохранить</button>
               )
               : (
                 <button 
                   className="profile__button profile__editButton"
                   onClick={handleProfileEditButton}
+                  disabled={isLoading}
                 >Редактировать</button>
               )
           }
