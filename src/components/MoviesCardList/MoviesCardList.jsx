@@ -50,21 +50,9 @@ function MoviesCardList({
   }, [width, increment])
 
   React.useEffect(() => {
-    // if (movies.length === 0) {
-    //   setMoviesNotFound(true)
-    // }
     setFilteredMovies(movies.slice(0, cardsMaxCount))
     setMoviesLeft(movies.length > cardsMaxCount)
   }, [movies, cardsMaxCount])
-  
-  // React.useMemo(() => {
-  //   if (!filteredMovies.length && !movies.length) {
-  //     setMoviesNotFound(true)
-  //   } else {
-  //     setMoviesNotFound(false)
-  //   }
-  //   // console.log('fire')
-  // }, [filteredMovies, movies])
 
   function handleMore() {
     setIncrement(increment + 1)

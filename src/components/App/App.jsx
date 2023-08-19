@@ -64,14 +64,13 @@ function App() {
     }
   }, [loggedIn])
 
-  function handleRegister(name, email, password) {
-    mainApi.signup({ name, email, password })
-      .then(() => {
-        navigate('/signin', { replace: true })
-      })
-      .catch(err => {
-        console.error(err)
-      })
+  async function handleRegister(name, email, password) {
+    try {
+      const newUser = await mainApi.signup({ name, email, password })
+      await handleLogin(email, password)
+    } catch(err) {
+      console.error('error', err)
+    }
   }
   function handleLogin(email, password) {
     if (!email || !password) {
@@ -85,7 +84,6 @@ function App() {
         setIsLoginError(false)
       })
       .catch(err => {
-        console.log('isLoginError:', isLoginError)
         console.error(err)
         setIsLoginError(true)
       })
