@@ -1,9 +1,9 @@
 import './Login.css'
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
-function Login({ onLogin, isError, setIsLoginError }) {
+function Login({ onLogin, isError, setIsLoginError, loggedIn }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -11,6 +11,14 @@ function Login({ onLogin, isError, setIsLoginError }) {
   const [passwordError, setPasswordError] = React.useState('');
 
   const [submitAllowed, setSubmitAllowed] = React.useState(false)
+
+  const navigate = useNavigate()
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      navigate('/')
+    }
+  }, [loggedIn])
 
   React.useEffect(() => {
     setIsLoginError(false)

@@ -1,9 +1,9 @@
 import './Register.css'
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
-function Register({ onRegister, isError }) {
+function Register({ onRegister, isError, loggedIn }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('')
@@ -13,6 +13,14 @@ function Register({ onRegister, isError }) {
   const [passwordError, setPasswordError] = React.useState('')
   
   const [submitAllowed, setSubmitAllowed] = React.useState(false);
+
+  const navigate = useNavigate()
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      navigate('/')
+    }
+  }, [loggedIn])
 
   React.useEffect(() => {
     if (!passwordError && !emailError && !nameError) {

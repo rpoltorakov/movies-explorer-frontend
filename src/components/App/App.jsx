@@ -93,6 +93,7 @@ function App() {
       .then(() => {
         setLoggedIn(false)
         localStorage.clear()
+        navigate('/')
       })
       .catch(err => {
         console.error(err)
@@ -277,7 +278,13 @@ function App() {
 
           <Route
             path='/signup'
-            element={<Register onRegister={handleRegister} isError={isLoginError} />}
+            element={
+              <Register
+                onRegister={handleRegister}
+                isError={isLoginError}
+                loggedIn={loggedIn} 
+              />
+            }
           />
 
           <Route 
