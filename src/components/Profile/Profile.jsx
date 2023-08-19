@@ -5,7 +5,7 @@ import Popup from '../Popup/Popup';
 import './Profile.css';
 
 
-function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrentUser, profileError, setProfileError, handlePatchUser }) {
+function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrentUser, profileError, setProfileError, handlePatchUser, profileChangedMessage }) {
   const [editMode, setEditMode] = React.useState(false);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -103,6 +103,7 @@ function Profile({ isOpened, onClose, onClick, onLogout, currentUser, setCurrent
         {profileError && <label className='profile__error'>Что-то пошло не так...</label>}
 
         <div className="profile__buttons">
+          {profileChangedMessage && <p className='profile__submit'>Успешно!</p>}
           {
             editMode ? 
               (

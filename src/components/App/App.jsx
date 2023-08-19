@@ -26,6 +26,8 @@ function App() {
   const [searchValueSaved, setSearchValueSaved] = useState('');
   const [profileError, setProfileError] = useState(false);
   const [isLoginError, setIsLoginError] = useState(false);
+  const [moviesNotFound, setMoviesNotFound] = useState(false);
+  const [profileChanged, setProfileChanged] = useState(false);
 
   const navigate = useNavigate();
 
@@ -133,7 +135,11 @@ function App() {
       localStorage.setItem('cachedQuery', query)
       localStorage.setItem('lastCheckbox', JSON.stringify(checkbox))
       localStorage.setItem('cachedMovies', JSON.stringify(downloadedMovies))
-      setFoundMovies(filterMovies(query, downloadedMovies, checkbox))
+      const filteredMovies = filterMovies(query, downloadedMovies, checkbox)
+      setFoundMovies(filteredMovies)
+      if (filteredMovies.length === 0) {
+        setMoviesNotFound(true)
+      }
       setIsLoading(false)
     } catch(err) {
       console.error('error', err)
@@ -178,8 +184,10 @@ function App() {
       const newCurrentUser = await mainApi.patchCurrentUser(data)
       setCurrentUser(newCurrentUser)
       setProfileError(false)
+      setProfileChanged(true)
     } catch(err) {
       setProfileError(true)
+      setProfileChanged(false)
       console.error('error', err)
     }
   }
@@ -225,6 +233,7 @@ function App() {
                 deleteMovie={deleteMovie}
 
                 isLoading={isLoading}
+                moviesNotFound={moviesNotFound}
               />
             } 
           />
@@ -272,6 +281,7 @@ function App() {
 
                 profileError={profileError}
                 setProfileError={setProfileError}
+                profileChangedMessage={profileChanged}
               />
             }
           />

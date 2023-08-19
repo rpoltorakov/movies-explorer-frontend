@@ -26,6 +26,7 @@ function Movies({
   saveMovie,
   deleteMovie,
   filteredMovies,
+  moviesNotFound,
 
   isLoading
 }) {
@@ -50,6 +51,7 @@ function Movies({
           saveMovie={saveMovie}
           savedMovies={savedMovies}
           deleteMovie={deleteMovie}
+          moviesNotFound={moviesNotFound}
         />
         {isLoading && <Preloader />}
       </main>

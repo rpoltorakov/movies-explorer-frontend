@@ -125,6 +125,16 @@
   line-height: normal;
 }
 
+.profile__submit {
+  padding: 0;
+  margin: 10px 0 0 0;
+  color: #4285F4;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 @media screen and (max-width: 780px) {
   .profile {
     margin-left: 30px;
