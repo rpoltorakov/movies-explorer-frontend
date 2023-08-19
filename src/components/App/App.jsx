@@ -31,28 +31,34 @@ function App() {
 
   const navigate = useNavigate();
 
-  async function handleUserCheck() {
+  async function handleUserCheckFull() {
     try {
       if (localStorage.getItem('loggedIn')) {
         const user = await mainApi.getCurrentUser()
         setCurrentUser(user.user)
         setLoggedIn(true)
+        console.log('here')
         setIsLoading(true)
         const downloadedSavedMovies = await mainApi.getMovies()
         setSavedMovies(downloadedSavedMovies)
         setIsLoading(false)
+
         setSearchValue(localStorage.getItem('cachedQuery'))
         setCheckbox(localStorage.getItem('lastCheckbox') === 'true')
       }
     } catch(err) {
       console.error('error', err)
+      if (err === 401) {
+        setLoggedIn(false)
+        localStorage.clear()
+        navigate('/')
+      }
     }
     
-  } 
-
+  }
   useEffect(() => {
-    handleUserCheck()
-  }, [navigate])
+    handleUserCheckFull()
+  }, [Movies, SavedMovies])
 
   useEffect(() => {
     if (loggedIn) {
@@ -60,9 +66,16 @@ function App() {
         .then((user) => {
           setCurrentUser(user.user)
         })
-        .catch(err => {console.error(err)})
+        .catch(err => {
+          if (err === 401) {
+            setLoggedIn(false)
+            localStorage.clear()
+            navigate('/')
+          }
+          console.error(err)
+        })
     }
-  }, [loggedIn])
+  }, [loggedIn, navigate])
 
   async function handleRegister(name, email, password) {
     try {
@@ -128,6 +141,7 @@ function App() {
 
   async function handleSearch(query, checkbox) {
     try {
+      await mainApi.getCurrentUser()
       setIsLoading(true)
       const downloadedMovies = await moviesApi.getMoviesList()
       localStorage.setItem('cachedQuery', query)
@@ -140,6 +154,11 @@ function App() {
       }
       setIsLoading(false)
     } catch(err) {
+      if (err === 401) {
+        setLoggedIn(false)
+        localStorage.clear()
+        navigate('/')
+      }
       console.error('error', err)
     }
   }
@@ -173,6 +192,11 @@ function App() {
       const downloadedSavedMovies = await mainApi.getMovies()
       setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
     } catch(err) {
+      if (err === 401) {
+        setLoggedIn(false)
+        localStorage.clear()
+        navigate('/')
+      }
       console.error('error', err)
     }
   }

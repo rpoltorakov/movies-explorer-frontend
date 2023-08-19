@@ -23,7 +23,7 @@ function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleChe
     <section className='searchForm'>
 
       <div className='searchForm__searchStringWrapper'>
-        <form className='searchForm__searchString' onSubmit={handleSubmit}>
+        <form name='search' className='searchForm__searchString' onSubmit={handleSubmit}>
           <img
             className='searchForm__icon'
             src={searchIcon}

@@ -7,7 +7,7 @@ class MainApi {
   _returnData() {
     return (res) => {
       if (res.ok) {return res.json()} 
-      else {return Promise.reject(`Ошибка ${res.status}`)}
+      else {return Promise.reject(res.status)}
     }
   }
 

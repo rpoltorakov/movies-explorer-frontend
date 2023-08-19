@@ -68,7 +68,7 @@ function Login({ onLogin, isError, setIsLoginError, loggedIn }) {
 
         <h2 className="login__title">Рады видеть!</h2>
 
-        <form className="login__form" onSubmit={handleSubmit}>
+        <form name='login' className="login__form" onSubmit={handleSubmit}>
 
           <label htmlFor="" className="login__input-label">E-mail
             <input

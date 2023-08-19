@@ -84,7 +84,7 @@ function Register({ onRegister, isError, loggedIn }) {
 
         <h2 className="register__title">Добро пожаловать!</h2>
 
-        <form className="register__form" onSubmit={handleSubmit}>
+        <form name='register' className="register__form" onSubmit={handleSubmit}>
 
           <label htmlFor="" className="register__input-label">
             Имя
