@@ -2,6 +2,16 @@ import './MoviesCardList.css'
 import React from 'react'
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useLocation } from 'react-router-dom';
+import {
+  WIDTH_S,
+  WIDTH_M,
+  CARDS_COUNT_S,
+  CARDS_COUNT_M,
+  CARDS_COUNT_L,
+  CARDS_STEP_S,
+  CARDS_STEP_M,
+} from '../../utils/constants';
+
 
 function MoviesCardList({
   movies,
@@ -13,14 +23,14 @@ function MoviesCardList({
 }) {
   const [width, setWidth] = React.useState(window.innerWidth);
   const [cardsMaxCount, setCardsMaxCount] = React.useState(
-    window.innerWidth <= 725 ? 5 :
-    window.innerWidth > 725 && window.innerWidth < 1153 ? 8 : 12
+    window.innerWidth <= WIDTH_S ? CARDS_COUNT_S :
+    window.innerWidth > WIDTH_S && window.innerWidth < WIDTH_M ? CARDS_COUNT_M : CARDS_COUNT_L
   );
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
   const [increment, setIncrement] = React.useState(0);
   const [incrementStep, setIncrementStep] = React.useState(
-    window.innerWidth <= 725 ? 2 :
-    window.innerWidth > 725 && window.innerWidth < 1153 ? 2 : 3
+    window.innerWidth <= WIDTH_S ? CARDS_STEP_S :
+    window.innerWidth > WIDTH_S && window.innerWidth < WIDTH_M ? CARDS_STEP_S : CARDS_STEP_M
   )
   const [moviesLeft, setMoviesLeft] = React.useState(movies.length > cardsMaxCount);
 
@@ -38,15 +48,15 @@ function MoviesCardList({
 
   React.useEffect(() => {
     setIncrementStep(
-      window.innerWidth <= 725 ? 2 :
-      window.innerWidth > 725 && window.innerWidth < 1153 ? 2 : 3
+      window.innerWidth <= WIDTH_S ? CARDS_STEP_S :
+      window.innerWidth > WIDTH_S && window.innerWidth < WIDTH_M ? CARDS_STEP_S : CARDS_STEP_M
     )
   }, [width])
 
   React.useEffect(() => {
     setCardsMaxCount(increment*incrementStep + (
-      width <= 725 ? 5 :
-      width > 725 && width < 1153 ? 8 : 12
+      width <= WIDTH_S ? CARDS_COUNT_S :
+      width > WIDTH_S && width < WIDTH_M ? CARDS_COUNT_M : CARDS_COUNT_L
     ))
   }, [width, increment])
 

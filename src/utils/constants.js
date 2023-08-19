@@ -1,8 +1,19 @@
-const WIDTH_S = 123
-const WIDTH_M = 123
-const WIDTH_L = 123
+const WIDTH_S = 725
+const WIDTH_M = 1153
 
-const CARDS_COUNT_S = 2
-const CARDS_COUNT_M = 2
-const CARDS_COUNT_L = 3
+const CARDS_COUNT_S = 5
+const CARDS_COUNT_M = 8
+const CARDS_COUNT_L = 12
 
+const CARDS_STEP_S = 2
+const CARDS_STEP_M = 3
+
+export {
+  WIDTH_S,
+  WIDTH_M,
+  CARDS_COUNT_S,
+  CARDS_COUNT_M,
+  CARDS_COUNT_L,
+  CARDS_STEP_S,
+  CARDS_STEP_M,
+}
