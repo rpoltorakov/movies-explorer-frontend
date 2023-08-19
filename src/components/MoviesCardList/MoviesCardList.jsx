@@ -1,6 +1,7 @@
 import './MoviesCardList.css'
 import React from 'react'
 import MoviesCard from '../MoviesCard/MoviesCard';
+import { useLocation } from 'react-router-dom';
 
 function MoviesCardList({
   movies,
@@ -23,8 +24,8 @@ function MoviesCardList({
   )
   const [moviesLeft, setMoviesLeft] = React.useState(movies.length > cardsMaxCount);
 
-  // const [moviesNotFound, setMoviesNotFound] = React.useState(false);
-  
+  const location = useLocation()
+
   async function updateWidth() {
     setTimeout(() => {setWidth(window.innerWidth)}, 100);
   }
@@ -50,8 +51,12 @@ function MoviesCardList({
   }, [width, increment])
 
   React.useEffect(() => {
-    setFilteredMovies(movies.slice(0, cardsMaxCount))
-    setMoviesLeft(movies.length > cardsMaxCount)
+    if (location.pathname === '/movies') {
+      setFilteredMovies(movies.slice(0, cardsMaxCount))
+      setMoviesLeft(movies.length > cardsMaxCount)
+    } else {
+      setFilteredMovies(movies)
+    }
   }, [movies, cardsMaxCount])
 
   function handleMore() {
@@ -74,9 +79,8 @@ function MoviesCardList({
           ))
         }
       </div>
-      {/* {!filteredMovies.length && !movies.length && <p className='moviesCardList__nothingFound'>Ничего не найдено</p>} */}
       {moviesNotFound && <p className='moviesCardList__nothingFound'>Ничего не найдено</p>}
-      {moviesLeft && <button className='movies__buttonMore' type='button' onClick={handleMore}>Ещё</button>}
+      {location.pathname === '/movies' && moviesLeft && <button className='movies__buttonMore' type='button' onClick={handleMore}>Ещё</button>}
     </section>
   );
 }

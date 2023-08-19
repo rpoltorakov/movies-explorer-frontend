@@ -150,6 +150,8 @@ function App() {
       setFoundMovies(filteredMovies)
       if (filteredMovies.length === 0) {
         setMoviesNotFound(true)
+      } else {
+        setMoviesNotFound(false)
       }
       setIsLoading(false)
     } catch(err) {
@@ -189,7 +191,8 @@ function App() {
   async function onSavedMoviesMount() {
     try {
       const downloadedSavedMovies = await mainApi.getMovies()
-      setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
+      // setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
+      setSavedMovies(downloadedSavedMovies)
     } catch(err) {
       if (err === 401) {
         setLoggedIn(false)

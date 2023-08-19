@@ -1,12 +1,14 @@
 import './SearchForm.css'
 import React from 'react'
 import searchIcon from '../../images/search-icon.svg'
+import { useLocation } from 'react-router-dom';
 
 function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleCheckboxChange }) {
+  const location = useLocation()
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    if (searchValue) {
+    if (searchValue && location.pathname === '/movies') {
       onSearch(searchValue, checkbox)
     }
   }
