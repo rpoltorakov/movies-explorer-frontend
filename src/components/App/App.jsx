@@ -37,7 +37,6 @@ function App() {
         const user = await mainApi.getCurrentUser()
         setCurrentUser(user.user)
         setLoggedIn(true)
-        console.log('here')
         setIsLoading(true)
         const downloadedSavedMovies = await mainApi.getMovies()
         setSavedMovies(downloadedSavedMovies)
@@ -165,7 +164,7 @@ function App() {
 
   async function handleSearchSaved(query) {
     const downloadedSavedMovies = await mainApi.getMovies()
-    setSavedMovies(filterMovies(query, downloadedSavedMovies, checkbox))
+    setSavedMovies(downloadedSavedMovies)
   }
 
   async function handleCheckboxChange(checkbox) {
