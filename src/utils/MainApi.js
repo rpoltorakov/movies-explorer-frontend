@@ -101,8 +101,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  // baseUrl: 'https://api.moviexp.rpoltorakov.nomoredomains.xyz',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.moviexp.rpoltorakov.nomoredomains.xyz',
+  // baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json'
   }
