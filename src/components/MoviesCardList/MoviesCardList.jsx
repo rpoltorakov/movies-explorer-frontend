@@ -39,7 +39,6 @@ function MoviesCardList({
   async function updateWidth() {
     setTimeout(() => {setWidth(window.innerWidth)}, 100);
   }
-
   React.useEffect(() => {
     updateWidth()
     window.addEventListener("resize", updateWidth)

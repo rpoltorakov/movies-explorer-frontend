@@ -127,6 +127,9 @@ function App() {
       setSavedMovies([...savedMovies, saved])  
     } catch(err) {
       console.error('error', err)
+      setLoggedIn(false)
+      localStorage.clear()
+      navigate('/')
     }
     
   }
@@ -137,13 +140,13 @@ function App() {
       setSavedMovies(savedMovies.filter(m => m._id !== deletedMovie._id))
     } catch(err) {
       console.error('error', err)
+      setLoggedIn(false)
+      localStorage.clear()
+      navigate('/')
     }
   }
 
   async function handleSearch(query, checkbox) {
-    console.log('query:', query)
-    console.log('query.length:', query.length)
-    console.log('checkbox:', checkbox)
     try {
       if (query.length !== 0) {
         await mainApi.getCurrentUser()
@@ -185,8 +188,6 @@ function App() {
       setCheckbox(checkbox)
       const downloadedMovies = JSON.parse(localStorage.getItem('cachedMovies'))
       setFoundMovies(filterMovies(searchValue, downloadedMovies, checkbox))
-      const downloadedSavedMovies = await mainApi.getMovies()
-      // setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
     } catch (err) {
       console.error('error', err)
     }
