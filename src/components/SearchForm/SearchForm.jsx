@@ -3,12 +3,11 @@ import React from 'react'
 import searchIcon from '../../images/search-icon.svg'
 import { useLocation } from 'react-router-dom';
 
-function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleCheckboxChange, isSearchError }) {
+function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleCheckboxChange, isSearchError, isLoading }) {
   const location = useLocation()
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    // if (searchValue && location.pathname === '/movies') {
     if (location.pathname === '/movies') {
       onSearch(searchValue, checkbox)
     }
@@ -38,6 +37,7 @@ function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleChe
             className='searchForm__input'
             value={searchValue}
             onChange={handleSearchValueChange}
+            readOnly={isLoading}
           />
           <button className='searchForm__button' />
         </form>
@@ -52,6 +52,7 @@ function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleChe
             type="checkbox"
             checked={checkbox}
             onChange={onCheckboxChange}
+            readOnly={isLoading}
           />
           <span className="searchForm__slider" />
         </label>

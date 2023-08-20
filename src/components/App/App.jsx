@@ -80,27 +80,31 @@ function App() {
 
   async function handleRegister(name, email, password) {
     try {
+      setIsLoading(true)
       const newUser = await mainApi.signup({ name, email, password })
+      setIsLoading(false)
       await handleLogin(email, password)
     } catch(err) {
+      setIsLoading(false)
       console.error('error', err)
     }
   }
-  function handleLogin(email, password) {
-    if (!email || !password) {
-      return
-    }
-    mainApi.signin({ email, password })
-      .then(() => {
+  async function handleLogin(email, password) {
+    try {
+      if (email && password) {
+        setIsLoading(true)
+        await mainApi.signin({ email, password })
         localStorage.setItem('loggedIn', true)
         setLoggedIn(true)
         navigate('/movies')
         setIsLoginError(false)
-      })
-      .catch(err => {
-        console.error(err)
-        setIsLoginError(true)
-      })
+        setIsLoading(false)
+      }
+    } catch(err) {
+      setIsLoading(false)
+      console.error('error', err)
+      setIsLoginError(true)
+    }
   }
   function handleLogout() {
     mainApi.signout()
@@ -335,7 +339,8 @@ function App() {
               <Register
                 onRegister={handleRegister}
                 isError={isLoginError}
-                loggedIn={loggedIn} 
+                loggedIn={loggedIn}
+                isLoading={isLoading}
               />
             }
           />
@@ -348,6 +353,7 @@ function App() {
                 loggedIn={loggedIn}
                 isError={isLoginError}
                 setIsLoginError={setIsLoginError}
+                isLoading={isLoading}
               />
             }
           />

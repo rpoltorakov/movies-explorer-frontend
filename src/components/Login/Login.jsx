@@ -3,7 +3,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
-function Login({ onLogin, isError, setIsLoginError, loggedIn }) {
+function Login({ onLogin, isError, setIsLoginError, loggedIn, isLoading }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -75,11 +75,9 @@ function Login({ onLogin, isError, setIsLoginError, loggedIn }) {
               type="email"
               className="login__input"
               placeholder='Введите почту'
-              minLength='2'
-              maxLength='200'
-              required
               value={email}
               onChange={handleChangeEmail}
+              readOnly={isLoading}
             />
             {emailError && <span className="login__input-error">{emailError}</span>}
           </label>
@@ -91,6 +89,7 @@ function Login({ onLogin, isError, setIsLoginError, loggedIn }) {
               placeholder='Введите пароль'
               value={password}
               onChange={handleChangePassword}
+              readOnly={isLoading}
             />
             {passwordError && <span className="login__input-error">{passwordError}</span>}
           </label>

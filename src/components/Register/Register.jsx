@@ -3,7 +3,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg'
 
-function Register({ onRegister, isError, loggedIn }) {
+function Register({ onRegister, isLoading, loggedIn }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('')
@@ -94,6 +94,7 @@ function Register({ onRegister, isError, loggedIn }) {
               placeholder='Введите имя'
               value={name}
               onChange={handleChangeName}
+              readOnly={isLoading}
             />
             {nameError && <span className="register__input-error">{nameError}</span>}
           </label>
@@ -105,6 +106,7 @@ function Register({ onRegister, isError, loggedIn }) {
               placeholder='Введите почту'
               value={email}
               onChange={handleChangeEmail}
+              readOnly={isLoading}
             />
             {emailError && <span className="register__input-error">{emailError}</span>}
           </label>
@@ -117,6 +119,7 @@ function Register({ onRegister, isError, loggedIn }) {
               placeholder='Введите пароль'
               value={password}
               onChange={handleChangePassword}
+              readOnly={isLoading}
             />
             {passwordError && <span className="register__input-error">{passwordError}</span>}
           </label>

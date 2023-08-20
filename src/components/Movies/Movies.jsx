@@ -47,6 +47,8 @@ function Movies({
           checkbox={checkbox}
           handleCheckboxChange={handleCheckboxChange}
           isSearchError={isSearchError}
+          readOnly={isLoading}
+          isLoading={isLoading}
         />
         <MoviesCardList 
           movies={movies}
