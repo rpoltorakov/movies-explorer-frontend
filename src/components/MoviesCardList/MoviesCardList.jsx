@@ -22,16 +22,13 @@ function MoviesCardList({
   moviesNotFound
 }) {
   const [width, setWidth] = React.useState(window.innerWidth);
-  const [cardsMaxCount, setCardsMaxCount] = React.useState(
-    window.innerWidth <= WIDTH_S ? CARDS_COUNT_S :
-    window.innerWidth > WIDTH_S && window.innerWidth < WIDTH_M ? CARDS_COUNT_M : CARDS_COUNT_L
-  );
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
-  const [increment, setIncrement] = React.useState(0);
-  const [incrementStep, setIncrementStep] = React.useState(
-    window.innerWidth <= WIDTH_S ? CARDS_STEP_S :
-    window.innerWidth > WIDTH_S && window.innerWidth < WIDTH_M ? CARDS_STEP_S : CARDS_STEP_M
-  )
+  const [rows, setRows] = React.useState(window.innerWidth <= WIDTH_S ? 5 : 4);
+  const [cols, setCols] = React.useState(
+    window.innerWidth < WIDTH_S ? 1 :
+    window.innerWidth > WIDTH_S && window.innerWidth < WIDTH_M ? 2 : 3
+  );
+  const [cardsMaxCount, setCardsMaxCount] = React.useState(rows * cols);
   const [moviesLeft, setMoviesLeft] = React.useState(movies.length > cardsMaxCount);
 
   const location = useLocation()
@@ -46,18 +43,16 @@ function MoviesCardList({
   }, [])
 
   React.useEffect(() => {
-    setIncrementStep(
-      window.innerWidth <= WIDTH_S ? CARDS_STEP_S :
-      window.innerWidth > WIDTH_S && window.innerWidth < WIDTH_M ? CARDS_STEP_S : CARDS_STEP_M
-    )
-  }, [width])
+    const rows = window.innerWidth < WIDTH_S ? 5 : 4
+    setRows(rows)
+    const cols = getComputedStyle(document.querySelector('.moviesCardList__container')).gridTemplateColumns.split(' ').length
+    setCols(cols)
+    setCardsMaxCount(rows*cols)
+  }, [width, movies])
 
   React.useEffect(() => {
-    setCardsMaxCount(increment*incrementStep + (
-      width <= WIDTH_S ? CARDS_COUNT_S :
-      width > WIDTH_S && width < WIDTH_M ? CARDS_COUNT_M : CARDS_COUNT_L
-    ))
-  }, [width, increment])
+    setCardsMaxCount(rows*cols)
+  }, [rows])
 
   React.useEffect(() => {
     if (location.pathname === '/movies') {
@@ -69,11 +64,12 @@ function MoviesCardList({
   }, [movies, cardsMaxCount])
 
   function handleMore() {
-    setIncrement(increment + 1)
+    setRows(rows + 1)
   }
   
   return (
     <section className='moviesCardList'>
+
       <div className='moviesCardList__container'>
         {
           filteredMovies.map(movie => (
@@ -88,6 +84,7 @@ function MoviesCardList({
           ))
         }
       </div>
+
       {moviesNotFound && <p className='moviesCardList__nothingFound'>Ничего не найдено</p>}
       {location.pathname === '/movies' && moviesLeft && <button className='movies__buttonMore' type='button' onClick={handleMore}>Ещё</button>}
     </section>
