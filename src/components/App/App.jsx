@@ -29,6 +29,7 @@ function App() {
   const [moviesNotFound, setMoviesNotFound] = useState(false);
   const [profileChanged, setProfileChanged] = useState(false);
   const [isSearchError, setIsSearchError] = useState(false)
+  const [checkboxSaved, setCheckboxSaved] = useState(false);
 
   const navigate = useNavigate();
 
@@ -185,7 +186,7 @@ function App() {
       const downloadedMovies = JSON.parse(localStorage.getItem('cachedMovies'))
       setFoundMovies(filterMovies(searchValue, downloadedMovies, checkbox))
       const downloadedSavedMovies = await mainApi.getMovies()
-      setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
+      // setSavedMovies(filterMovies(searchValueSaved, downloadedSavedMovies, checkbox))
     } catch (err) {
       console.error('error', err)
     }
@@ -203,6 +204,7 @@ function App() {
     try {
       const downloadedSavedMovies = await mainApi.getMovies()
       setSavedMovies(downloadedSavedMovies)
+      setSearchValueSaved('')
     } catch(err) {
       if (err === 401) {
         setLoggedIn(false)
@@ -293,8 +295,8 @@ function App() {
 
                 searchValueSaved={searchValueSaved}
                 setSearchValueSaved={setSearchValueSaved}
-                checkbox={checkbox}
-                handleCheckboxChange={handleCheckboxChange}
+                checkbox={checkboxSaved}
+                handleCheckboxChange={setCheckboxSaved}
                 onSearch={handleSearchSaved}
               />
             }
