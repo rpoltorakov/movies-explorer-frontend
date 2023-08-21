@@ -6,13 +6,6 @@ import { useLocation } from 'react-router-dom';
 function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleCheckboxChange, isSearchError, isLoading }) {
   const location = useLocation()
 
-  React.useEffect(() => {
-    if (location.pathname === '/saved-movies') {
-      setSearchValue('')
-      handleCheckboxChange(false)
-    }
-  }, [])
-
   function handleSubmit(evt) {
     evt.preventDefault();
     if (location.pathname === '/movies') {
