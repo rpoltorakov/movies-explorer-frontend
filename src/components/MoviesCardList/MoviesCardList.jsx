@@ -23,7 +23,8 @@ function MoviesCardList({
 }) {
   const [width, setWidth] = React.useState(window.innerWidth);
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
-  const [rows, setRows] = React.useState(window.innerWidth <= WIDTH_S ? 5 : 4);
+  // const [rows, setRows] = React.useState(window.innerWidth <= WIDTH_S ? 5 : 4);
+  const [rows, setRows] = React.useState(4)
   const [cols, setCols] = React.useState(
     window.innerWidth < WIDTH_S ? 1 :
     window.innerWidth > WIDTH_S && window.innerWidth < WIDTH_M ? 2 : 3
@@ -43,9 +44,10 @@ function MoviesCardList({
   }, [])
 
   React.useEffect(() => {
-    const rows = window.innerWidth < WIDTH_S ? 5 : 4
+    const gridCols = getComputedStyle(document.querySelector('.moviesCardList__container')).gridTemplateColumns.split(' ').length
+    const rows = gridCols === 1 ? 5 : 4
     setRows(rows)
-    const cols = getComputedStyle(document.querySelector('.moviesCardList__container')).gridTemplateColumns.split(' ').length
+    const cols = gridCols
     setCols(cols)
     setCardsMaxCount(rows*cols)
   }, [width, movies])
