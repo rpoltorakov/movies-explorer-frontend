@@ -192,6 +192,7 @@ function App() {
       setCheckbox(checkbox)
       const downloadedMovies = JSON.parse(localStorage.getItem('cachedMovies'))
       setFoundMovies(filterMovies(searchValue, downloadedMovies, checkbox))
+      localStorage.setItem('lastCheckbox', checkbox)
     } catch (err) {
       console.error('error', err)
     }
@@ -210,6 +211,7 @@ function App() {
       const downloadedSavedMovies = await mainApi.getMovies()
       setSavedMovies(downloadedSavedMovies)
       setSearchValueSaved('')
+      setCheckboxSaved(false)
     } catch(err) {
       if (err === 401) {
         setLoggedIn(false)
