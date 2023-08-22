@@ -5,11 +5,6 @@ import { useLocation } from 'react-router-dom';
 import {
   WIDTH_S,
   WIDTH_M,
-  CARDS_COUNT_S,
-  CARDS_COUNT_M,
-  CARDS_COUNT_L,
-  CARDS_STEP_S,
-  CARDS_STEP_M,
 } from '../../utils/constants';
 
 
@@ -23,7 +18,6 @@ function MoviesCardList({
 }) {
   const [width, setWidth] = React.useState(window.innerWidth);
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
-  // const [rows, setRows] = React.useState(window.innerWidth <= WIDTH_S ? 5 : 4);
   const [rows, setRows] = React.useState(4)
   const [cols, setCols] = React.useState(
     window.innerWidth < WIDTH_S ? 1 :
