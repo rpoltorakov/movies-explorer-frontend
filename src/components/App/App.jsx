@@ -111,6 +111,11 @@ function App() {
       .then(() => {
         setLoggedIn(false)
         localStorage.clear()
+        setCheckbox(false)
+        setCheckboxSaved(false)
+        setCurrentUser({})
+        setFoundMovies([])
+        setSearchValue('')
         navigate('/')
       })
       .catch(err => {
