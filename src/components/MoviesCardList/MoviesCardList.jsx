@@ -60,7 +60,11 @@ function MoviesCardList({
   }, [movies, cardsMaxCount])
 
   function handleMore() {
-    setRows(rows + 1)
+    if (cols === 1) {
+      setRows(rows + 2)
+    } else {
+      setRows(rows + 1)
+    }
   }
   
   return (
