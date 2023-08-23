@@ -45,7 +45,7 @@ function App() {
         setIsLoading(false)
 
         setSearchValue(localStorage.getItem('cachedQuery'))
-        setCheckbox(localStorage.getItem('lastCheckbox') === 'true')
+        setCheckbox(localStorage.getItem('cachedCheckbox') === 'true')
       }
     } catch(err) {
       console.error('error', err)
@@ -157,7 +157,7 @@ function App() {
         setIsLoading(true)
         const downloadedMovies = await moviesApi.getMoviesList()
         localStorage.setItem('cachedQuery', query)
-        localStorage.setItem('lastCheckbox', JSON.stringify(checkbox))
+        localStorage.setItem('cachedCheckbox', JSON.stringify(checkbox))
         localStorage.setItem('cachedMovies', JSON.stringify(downloadedMovies))
         const filteredMovies = filterMovies(query, downloadedMovies, checkbox)
         setFoundMovies(filteredMovies)
@@ -192,7 +192,7 @@ function App() {
       setCheckbox(checkbox)
       const downloadedMovies = JSON.parse(localStorage.getItem('cachedMovies'))
       setFoundMovies(filterMovies(searchValue, downloadedMovies, checkbox))
-      localStorage.setItem('lastCheckbox', checkbox)
+      localStorage.setItem('cachedCheckbox', checkbox)
     } catch (err) {
       console.error('error', err)
     }
@@ -201,9 +201,11 @@ function App() {
   function onMoviesMount() {
     const cachedMovies = JSON.parse(localStorage.getItem('cachedMovies'))
     const cachedQuery = localStorage.getItem('cachedQuery')
+    const cachedCheckbox = localStorage.getItem('cachedCheckbox') === 'true'
     if (cachedMovies && cachedQuery) {
-      setFoundMovies(filterMovies(cachedQuery, cachedMovies, checkbox))
+      setFoundMovies(filterMovies(cachedQuery, cachedMovies, cachedCheckbox))
       setIsSearchError(false)
+      setCheckbox()
     }
   }
   async function onSavedMoviesMount() {
