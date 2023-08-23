@@ -158,8 +158,8 @@ function App() {
   async function handleSearch(query, checkbox) {
     try {
       if (query.length !== 0) {
-        await mainApi.getCurrentUser()
         setIsLoading(true)
+        await mainApi.getCurrentUser()
         const downloadedMovies = await moviesApi.getMoviesList()
         localStorage.setItem('cachedQuery', query)
         localStorage.setItem('cachedCheckbox', JSON.stringify(checkbox))
