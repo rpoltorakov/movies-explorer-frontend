@@ -38,7 +38,7 @@ function SearchForm({ searchValue, setSearchValue, onSearch, checkbox, handleChe
             onChange={handleSearchValueChange}
             readOnly={isLoading}
           />
-          <button className='searchForm__button' />
+          <button className='searchForm__button' disabled={isLoading}/>
         </form>
       </div>
 

@@ -7,7 +7,6 @@ import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 
-
 function Movies({
   onMount,
 
