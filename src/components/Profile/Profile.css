@@ -7,11 +7,6 @@
   justify-content: space-between;
 }
 
-.profile > .header {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .profile__content {
   display: flex;
   flex-direction: column;
@@ -102,9 +97,8 @@
   color: white;
   cursor: pointer;
   margin: 0;
-  padding: 0;
+  padding: 13px 0 15px;
   width: 100%;
-  /* padding: 13px 0 15px; */
   font-size: 13px;
   line-height: normal;
   font-weight: 400;
@@ -112,6 +106,8 @@
 
 .profile__signoutButton {
   color: #EE3465;
+  text-align: center;
+  text-decoration: none;
 }
 
 .profile__saveButton {
@@ -119,9 +115,28 @@
   background: #4285F4;
 }
 
+.profile__error {
+  padding: 0;
+  margin: 10px 0 0 0;
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.profile__submit {
+  padding: 0;
+  margin: 10px 0 0 0;
+  color: #4285F4;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 @media screen and (max-width: 780px) {
   .profile {
-    /* padding: 0 30px 0; */
     margin-left: 30px;
     margin-right: 30px;
   }
@@ -132,9 +147,6 @@
 }
 
 @media screen and (max-width: 330px) {
-  .profile {
-    /* padding: 0 14px 0; */
-  }
 
   .profile__section {
     padding: 0 16px 0;
