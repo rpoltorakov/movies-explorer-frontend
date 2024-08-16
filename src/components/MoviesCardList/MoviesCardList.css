@@ -1,9 +1,8 @@
 .moviesCardList {
   margin: 0;
-  padding: 0 70px 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
   box-sizing: border-box;
 }
 
@@ -17,7 +16,14 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 800px) {
+.moviesCardList__nothingFound {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #EE3465;
+}
+
+@media screen and (max-width: 890px) {
   .moviesCardList {
     padding: 0;
   }
@@ -29,7 +35,7 @@
   }
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 360px) {
   .moviesCardList__container {
     grid-template-columns: repeat(auto-fit, 300px);
   }
